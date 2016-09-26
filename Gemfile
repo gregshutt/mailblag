@@ -50,3 +50,6 @@ gem 'pg'
 # authentication
 gem 'sorcery'
 gem 'cancancan'
+
+gem 'mail_room'
+gem 'que'
