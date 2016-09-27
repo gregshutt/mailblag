@@ -53,3 +53,4 @@ gem 'cancancan'
 
 gem 'mail_room'
 gem 'que'
+gem 'que-testing'

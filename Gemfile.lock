@@ -119,6 +119,8 @@ GEM
     pg (0.19.0)
     pkg-config (1.1.7)
     que (0.12.0)
+    que-testing (0.1.1)
+      que
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -204,6 +206,7 @@ DEPENDENCIES
   mail_room
   pg
   que
+  que-testing
   rails (~> 4.2)
   sass-rails (~> 5.0)
   sorcery
