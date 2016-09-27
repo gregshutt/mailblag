@@ -1,3 +1,4 @@
+require 'rails_helper'
 require 'que/testing'
 
 describe "EmailReceiverJob" do
