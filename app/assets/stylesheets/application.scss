@@ -1,0 +1,31 @@
+@import "bootstrap-overrides";
+@import "fonts";
+@import "font-awesome/font-awesome";
+
+@import "bootstrap";
+
+@import "webix";
+@import "pivot";
+
+//@import "jquery-ui/core";
+//@import "jquery-ui/datepicker";
+
+.okcanceltab {
+  background:#f5f5f5;
+  border-top:1px solid #e5e5e5;
+  margin-bottom:20px;
+
+  div.actions {
+    float:right;
+    padding:10px 15px;
+  }
+
+  input.btn {
+    width: 10em;
+  }
+
+  .btn-savewithcancel {
+    float:right;
+    margin-left:16px;
+  }
+}
