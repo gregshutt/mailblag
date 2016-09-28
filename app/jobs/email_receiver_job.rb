@@ -12,12 +12,20 @@ class EmailReceiverJob < Que::Job
           raise 'Unexpected mime type count'
         end
 
-        mime_type = mime_type.first
+        mime_type = mime_type.first.to_str
         
-        if mime_type.to_str.start_with? 'image/'
+        if mime_type.start_with? 'image/'
           puts part.attachment?
-        elsif mime_type.to_str.start_with? 'text/'
-          puts part.body
+        elsif mime_type.start_with? 'text/'
+
+          if mime_type == 'text/html'
+            # sanitize the html
+            content = ActionView::Helpers::SanitizeHelper.strip_tags(part.body)
+            puts "html: #{content}"
+          elsif mime_type == 'text/plain'
+            puts "plain: #{part.body}"
+          end
+            #puts part.body
         else
           puts mime_type.inspect
         end

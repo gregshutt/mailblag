@@ -1,0 +1,51 @@
+Return-Path: <greg@example.com>
+Delivered-To: <greg@example.com>
+Received: from mail.example.com
+  by localhost (Dovecot) with LMTP id ICngBVDa61cTKwAA0J78UA
+  for <greg@example.com>; Wed, 28 Sep 2016 10:58:20 -0400
+Received: from localhost (localhost [127.0.0.1])
+  by mail.example.com (Postfix) with ESMTP id E64E8A27D
+  for <greg@example.com>; Wed, 28 Sep 2016 10:58:20 -0400 (EDT)
+X-Virus-Scanned: Debian amavisd-new at 
+X-Spam-Flag: NO
+X-Spam-Score: -2.899
+X-Spam-Level:
+X-Spam-Status: No, score=-2.899 tagged_above=-1000 required=2.5
+  tests=[ALL_TRUSTED=-1, BAYES_00=-1.9, HTML_MESSAGE=0.001]
+  autolearn=disabled
+Received: from mail.example.com ([IPv6:::ffff:127.0.0.1])
+  by localhost (localhost [::ffff:127.0.0.1]) (amavisd-new, port 10024)
+  with ESMTP id gzwNOFVmD8-K for <greg@example.com>;
+  Wed, 28 Sep 2016 10:58:20 -0400 (EDT)
+Received: from [10.10.10.201] (unknown [10.10.10.243])
+  (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+  (No client certificate requested)
+  by mail.example.com (Postfix) with ESMTPSA id BFA1CA28A
+  for <greg@example.com>; Wed, 28 Sep 2016 10:58:13 -0400 (EDT)
+From: Greg Shutt <greg@example.com>
+Content-Type: multipart/alternative;
+  boundary=Apple-Mail-C732D198-4A87-4E3A-9AFF-1FE6C732ADC8
+Content-Transfer-Encoding: 7bit
+Mime-Version: 1.0 (1.0)
+Date: Wed, 28 Sep 2016 10:57:39 -0400
+Subject: Test
+Message-Id: <757247B9-2253-44ED-84A1-A800EA61DC43@example.com>
+To: Greg Shutt <greg@example.com>
+X-Mailer: iPhone Mail (14A456)
+
+
+--Apple-Mail-C732D198-4A87-4E3A-9AFF-1FE6C732ADC8
+Content-Type: text/plain;
+  charset=us-ascii
+Content-Transfer-Encoding: 7bit
+
+Test text with bolded HTML
+
+Sent from my iPhone
+--Apple-Mail-C732D198-4A87-4E3A-9AFF-1FE6C732ADC8
+Content-Type: text/html;
+  charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body dir="auto"><div>Test text with bolded&nbsp;<b>HTML</b><br><br>Sent from my iPhone</div></body></html>
+--Apple-Mail-C732D198-4A87-4E3A-9AFF-1FE6C732ADC8--
