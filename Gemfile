@@ -58,3 +58,5 @@ gem 'que-testing'
 
 gem 'reverse_markdown'
 gem 'htmlentities'
+
+gem 'carrierwave', '>= 1.0.0.beta', '< 2.0'
