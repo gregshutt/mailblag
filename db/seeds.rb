@@ -10,3 +10,6 @@ s = Site.create(hostname: 'localhost', require_password: true, title: 'Test site
 ActsAsTenant::current_tenant = s
 
 SitePassword.create(password: 'test')
+
+Post.create(title: "Test post please ignore", content: "Ignore this post\n\n**Please**",
+  post_date: Date.today)
