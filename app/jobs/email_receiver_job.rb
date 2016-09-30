@@ -18,13 +18,19 @@ class EmailReceiverJob < Que::Job
 
         # convert the html entities
         text_content = HTMLEntities.new.decode text_content
+      elsif c[:mime_type].start_with? 'image/'
+        post_image = c[:post_image]
+        text_content = "[![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})"
+
+        post.post_images << post_image
       else
+        
         text_content = c[:content]
       end
 
       content << text_content
     end
-    puts content.string
+
     post.content = content.string
 
     post.save
@@ -47,7 +53,18 @@ class EmailReceiverJob < Que::Job
         mime_type = mime_type.first.to_str
         
         if mime_type.start_with? 'image/'
-          #puts part.attachment?
+          # store the image
+          temp_file = Tempfile.new('email-attachment')
+          temp_file.binmode
+          temp_file.write part.attachment
+          temp_file.rewind
+
+          post_image = PostImage.create(image: temp_file)
+
+          new_content_block = {content: 'image', mime_type: mime_type, post_image: post_image}
+
+          content_list << new_content_block
+
         elsif mime_type.start_with? 'text/'
           content = part.decoded
 

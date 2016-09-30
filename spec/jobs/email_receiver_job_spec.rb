@@ -35,5 +35,9 @@ describe "EmailReceiverJob" do
     expect(post.title).to eq('Test mail')
     expect(post.post_date.utc.to_i).to(
       eq(DateTime.parse('Tue, 27 Sep 2016 12:37:24 -0400').to_i) )
+
+    expect(post.post_images.length).to eq 2
+    expect(post.post_images[0]).not_to be_nil
+    expect(post.post_images[1]).not_to be_nil
   end
 end
