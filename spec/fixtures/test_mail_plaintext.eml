@@ -1,0 +1,28 @@
+Return-Path: <greg@example.com>
+Delivered-To: <greg@example.com>
+Received: from mail.example.com
+  by localhost (Dovecot) with LMTP id bWBdEtGu7lcFKgAA0J78UA
+  for <greg@example.com>; Fri, 30 Sep 2016 14:32:59 -0400
+Received: from buster.local (unknown [10.10.10.241])
+  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+  (No client certificate requested)
+  by mail.example.com (Postfix) with ESMTPSA id 9BA98A27D
+  for <greg@example.com>; Fri, 30 Sep 2016 14:32:59 -0400 (EDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=example.com; s=mail;
+  t=1475260379; bh=lFGe47e47CaTpJJb8cLIicBd6bZuO1gomGeIjNl866E=;
+  h=To:From:Subject:Date:From;
+  b=IJin8NRk2ORGOggQ4RPDGU39QjBgi6kvSq7+OYAD1tRu9CICkaEEp3x7b1uXNcMjI
+   Er1bmrYAYhCiIwbFVyFAhs1w3J1N/Dz6HzMRZyYc0TWZkRnrnUmEmMnhcaum7G+GdJ
+   xLmY/ZTdtBys6TZV7kkGuV6hf0pDkVBa6eHMXWjQ=
+To: greg@example.com
+From: Greg <greg@example.com>
+Subject: Plain text email
+Message-ID: <e736897b-9c80-d39b-b1e0-fafa6be298f6@example.com>
+Date: Fri, 30 Sep 2016 14:32:56 -0400
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0)
+ Gecko/20100101 Thunderbird/45.3.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Test plain text

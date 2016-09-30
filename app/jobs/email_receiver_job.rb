@@ -5,6 +5,8 @@ class EmailReceiverJob < Que::Job
     # break the message apart
     if mail.multipart?
       content_list = handle_multipart_message(mail)
+    else
+      content_list = handle_message(mail)
     end
 
     post = Post.new(post_date: mail.date, title: mail.subject)
@@ -39,6 +41,16 @@ class EmailReceiverJob < Que::Job
   end
 
   private
+    def handle_message(mail)
+      content_list = []
+
+      # handle the text portion
+      content_block = {mime_type: 'text/plain', content: mail.decoded}
+      content_list << content_block
+
+      content_list
+    end
+
     def handle_multipart_message(mail)
       content_list = []
       content_map = {}
@@ -63,7 +75,7 @@ class EmailReceiverJob < Que::Job
 
           post_image = PostImage.create(image: temp_file)
 
-          new_content_block = {content: 'image', mime_type: mime_type, post_image: post_image}
+          new_content_block = {mime_type: mime_type, post_image: post_image}
 
           content_list << new_content_block
 
