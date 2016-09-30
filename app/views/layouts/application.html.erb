@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= @site.title %></title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= @site.title %></title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <div class="content <%= "#{controller.controller_name}_#{controller.action_name}" %>">
+      <% unless @skip_header %>
+        <%= render 'layouts/header' %>
+      <% end %>
 
-</body>
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
+      <%= yield %>
+
+      <% unless @skip_footer %>
+        <%= render 'layouts/footer' %>
+      <% end %> 
+    </div>
+    
+  </body>
 </html>

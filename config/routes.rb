@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/logout', to: "user_sessions#destroy"
 
   get '/site-login', to: "site_logins#new"
+  post '/site-login', to: "site_logins#create"
 
   resources :posts
 end
