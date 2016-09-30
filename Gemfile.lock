@@ -87,6 +87,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    htmlentities (4.3.4)
     i18n (0.7.0)
     json (1.8.3)
     jwt (1.5.6)
@@ -151,6 +152,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (11.3.0)
     ref (2.0.0)
+    reverse_markdown (1.0.3)
+      nokogiri
     rspec-core (3.5.3)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -221,11 +224,13 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   coffee-rails (~> 4.1.0)
+  htmlentities
   mail_room
   pg
   que
   que-testing
   rails (~> 4.2)
+  reverse_markdown
   rspec-rails
   sass-rails (~> 5.0)
   sorcery
