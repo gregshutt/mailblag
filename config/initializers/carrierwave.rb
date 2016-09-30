@@ -24,11 +24,15 @@ class NullStorage
 end
 
 CarrierWave.configure do |config|
-  if Rails.env.test?
+  if Rails.env.development?
+    config.storage :file
+  elsif Rails.env.test?
     config.storage NullStorage
     # Required to prevent FactoryGirl from giving an infuriating exception
     # ArgumentError: wrong exec option
     # It also speeds up tests so it's a good idea
     config.enable_processing = false
+  elsif Rails.env.production?
+    config.storage :file
   end
 end

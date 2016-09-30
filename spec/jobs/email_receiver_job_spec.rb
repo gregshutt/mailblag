@@ -39,5 +39,7 @@ describe "EmailReceiverJob" do
     expect(post.post_images.length).to eq 2
     expect(post.post_images[0]).not_to be_nil
     expect(post.post_images[1]).not_to be_nil
+
+    expect(post.content).to eq("[![Image]()]()\n\n[![Image]()]()\n\n\n\nTest text\n\nSent from my iPhone")
   end
 end

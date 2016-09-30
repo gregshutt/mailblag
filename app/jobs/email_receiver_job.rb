@@ -18,11 +18,13 @@ class EmailReceiverJob < Que::Job
 
         # convert the html entities
         text_content = HTMLEntities.new.decode text_content
+      
       elsif c[:mime_type].start_with? 'image/'
         post_image = c[:post_image]
-        text_content = "[![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})"
+        text_content = "[![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})\n\n"
 
         post.post_images << post_image
+      
       else
         
         text_content = c[:content]

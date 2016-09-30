@@ -10,7 +10,7 @@
 #
 
 class PostImage < ActiveRecord::Base
-  mount_uploader :image
+  mount_uploader :image, PostImageUploader
 
   belongs_to :post
 end
