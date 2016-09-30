@@ -6,7 +6,7 @@ class SiteLoginsController < ApplicationController
 
   def create
     # check the password
-    site_password = SitePassword.find(password: params[:site_password]).first
+    site_password = SitePassword.where(password: params[:site_password]).first
 
     if ! site_password.nil?
       session[:site_password_id] = site_password.id

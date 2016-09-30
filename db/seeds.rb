@@ -5,4 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Site.create(hostname: 'localhost', require_password: true, title: 'Test site', is_default: true)
+s = Site.create(hostname: 'localhost', require_password: true, title: 'Test site', is_default: true)
+
+ActsAsTenant::current_tenant = s
+
+SitePassword.create(password: 'test')
