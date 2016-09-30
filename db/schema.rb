@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930191315) do
+ActiveRecord::Schema.define(version: 20160930195106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 20160930191315) do
     t.integer  "error_count",           default: 0,                                          null: false
     t.text     "last_error"
     t.text     "queue",                 default: "",                                         null: false
+  end
+
+  create_table "site_passwords", force: :cascade do |t|
+    t.integer  "site_id"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sites", force: :cascade do |t|

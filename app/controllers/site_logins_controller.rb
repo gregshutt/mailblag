@@ -6,7 +6,11 @@ class SiteLoginsController < ApplicationController
 
   def create
     # check the password
-    if params[:site_password] == 'turtle'
+    site_password = SitePassword.find(password: params[:site_password]).first
+
+    if ! site_password.nil?
+      session[:site_password_id] = site_password.id
+      redirect_to root_path
     else
       flash[:danger] = "Your password is incorrect."
       render 'new'

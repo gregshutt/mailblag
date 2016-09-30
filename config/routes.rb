@@ -19,6 +19,7 @@ end
 #            POST   /login(.:format)          user_sessions#create
 #     logout GET    /logout(.:format)         user_sessions#destroy
 # site_login GET    /site-login(.:format)     site_logins#new
+#            POST   /site-login(.:format)     site_logins#create
 #      posts GET    /posts(.:format)          posts#index
 #            POST   /posts(.:format)          posts#create
 #   new_post GET    /posts/new(.:format)      posts#new
