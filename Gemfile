@@ -52,6 +52,8 @@ gem 'pg'
 gem 'sorcery'
 gem 'cancancan'
 
+gem 'airbrake', '~> 4.0'
+
 gem 'mail_room'
 gem 'que'
 gem 'que-testing'

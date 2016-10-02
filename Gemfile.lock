@@ -39,6 +39,9 @@ GEM
     acts_as_tenant (0.4.0)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    airbrake (4.3.8)
+      builder
+      multi_json
     airbrussh (1.1.1)
       sshkit (>= 1.6.1, != 1.7.0)
     annotate (2.7.1)
@@ -225,6 +228,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_tenant
+  airbrake (~> 4.0)
   annotate
   bootstrap-sass (~> 3.0)
   byebug
