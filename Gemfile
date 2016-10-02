@@ -36,6 +36,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'annotate'
+  gem 'que-testing'
 end
 
 group :development do
@@ -56,7 +57,6 @@ gem 'airbrake', '~> 4.0'
 
 gem 'mail_room'
 gem 'que'
-gem 'que-testing'
 
 gem 'reverse_markdown'
 gem 'htmlentities'
