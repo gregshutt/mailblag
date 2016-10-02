@@ -6,6 +6,7 @@
 #  created_at :datetime
 #  id         :integer          not null, primary key
 #  post_date  :datetime
+#  site_id    :integer
 #  title      :string
 #  updated_at :datetime
 #  url        :string
