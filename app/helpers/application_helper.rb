@@ -20,7 +20,7 @@ module ApplicationHelper
       tables:             true
     }
  
-    renderer = RaptorRenderer.new(options)
+    renderer = Redcarpet::Render::HTML.new(options)
     markdown = Redcarpet::Markdown.new(renderer, extensions)
  
     markdown.render(text).html_safe
