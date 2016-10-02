@@ -1,5 +1,8 @@
 class EmailReceiverJob < Que::Job
   def run(message)
+    # TODO fix this
+    ActsAsTenant::current_tenant = Site.first
+
     mail = Mail::Message.new(message)
 
     # break the message apart
