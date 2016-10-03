@@ -19,9 +19,11 @@ class InlineImg < ReverseMarkdown::Converters::Img
 
       if ! image.nil?
         post_image = image[:post_image]
-        return " [![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})\n\n"
+        " [![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})\n\n"
+      else
+        # remove the image
+        ""
       end
-
     else
       super
     end
@@ -44,8 +46,13 @@ class EmailReceiverJob < Que::Job
 
     post = Post.new(post_date: mail.date, title: mail.subject)
 
-    # need to handle inline image attachments
-    ReverseMarkdown::Converters.register :img, InlineImg.new(content_list)
+    is_multipart_related = false
+    if content_list.first[:mime_type] == 'multipart/related'
+      is_multipart_related = true
+
+      # need to handle inline image attachments
+      ReverseMarkdown::Converters.register :img, InlineImg.new(content_list)
+    end
 
     # compose the post
     content = StringIO.new
@@ -54,14 +61,23 @@ class EmailReceiverJob < Que::Job
         # convert html to markdown
         text_content = ReverseMarkdown.convert c[:content], unknown_tags: :bypass, tag_border: ''
 
-        # convert the html entities
+        # convert any html entities (&nbsp, &gt, etc)
         text_content = HTMLEntities.new.decode text_content
       
       elsif c[:mime_type].start_with? 'image/'
+        # handle images
         post_image = c[:post_image]
-        text_content = "[![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})\n\n"
-
         post.post_images << post_image
+
+        # only add the image to the message if this is not a multipart/related message
+        if ! is_multipart_related
+          text_content = "[![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})\n\n"
+        else
+          text_content = ''
+        end
+
+      elsif c[:mime_type] == 'multipart/related'
+        # no op
       
       else
         
@@ -116,7 +132,7 @@ class EmailReceiverJob < Que::Job
           # remove leading and trailing < >
           content_id = part.content_id
           if ! content_id.nil?
-            content_id = content_id.gsub(/[<>]/, '')
+            content_id = content_id.gsub(/\A</, '').gsub(/>\Z/, '')
           end
 
           new_content_block = {mime_type: mime_type, content_id: content_id,
@@ -163,11 +179,10 @@ class EmailReceiverJob < Que::Job
           end
           
           content_map[raw_content] = new_content_block
-        else
-          # check for multipart part
-          if part.multipart?
-            handle_multipart_message(part, content_list, content_map)
-          end
+        elsif mime_type == 'multipart/related'
+          # forget everything else and only use this block
+          content_list = [{mime_type: 'multipart/related'}]
+          return handle_multipart_message(part, content_list)          
         end
       end
 
