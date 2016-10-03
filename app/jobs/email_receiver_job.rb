@@ -1,3 +1,33 @@
+class InlineImg < ReverseMarkdown::Converters::Img
+  def initialize(content_list)
+    @content_list = content_list
+  end
+
+  def convert(node, state = {})
+    if (! node['src'].nil?) && (node['src'].start_with? 'cid:')
+      cid = node['src']
+      cid.slice!('cid:')
+      
+      # find the associated image
+      image = @content_list.find do |c|
+        if c.has_key? :content_id
+          c[:content_id] == cid
+        else
+          false
+        end
+      end
+
+      if ! image.nil?
+        post_image = image[:post_image]
+        return " [![Image](#{post_image.image.url(:fullsize)})](#{post_image.image.url})\n\n"
+      end
+
+    else
+      super
+    end
+  end
+end
+
 class EmailReceiverJob < Que::Job
   def run(message)
     # TODO fix this
@@ -13,6 +43,9 @@ class EmailReceiverJob < Que::Job
     end
 
     post = Post.new(post_date: mail.date, title: mail.subject)
+
+    # need to handle inline image attachments
+    ReverseMarkdown::Converters.register :img, InlineImg.new(content_list)
 
     # compose the post
     content = StringIO.new
@@ -54,9 +87,9 @@ class EmailReceiverJob < Que::Job
       content_list
     end
 
-    def handle_multipart_message(mail)
-      content_list = []
-      content_map = {}
+    def handle_multipart_message(mail, content_list = nil, content_map = nil)
+      content_list ||= []
+      content_map ||= {}
 
       # go through each part of the message
       mail.parts.each do |part|
@@ -68,7 +101,7 @@ class EmailReceiverJob < Que::Job
         end
 
         mime_type = mime_type.first.to_str
-        
+
         if mime_type.start_with? 'image/'
           # store the image
           temp_file = Tempfile.new(['email-attachment', 
@@ -79,8 +112,15 @@ class EmailReceiverJob < Que::Job
           temp_file.rewind
 
           post_image = PostImage.create!(image: temp_file)
+          
+          # remove leading and trailing < >
+          content_id = part.content_id
+          if ! content_id.nil?
+            content_id = content_id.gsub(/[<>]/, '')
+          end
 
-          new_content_block = {mime_type: mime_type, post_image: post_image}
+          new_content_block = {mime_type: mime_type, content_id: content_id,
+            post_image: post_image}
 
           content_list << new_content_block
 
@@ -124,7 +164,10 @@ class EmailReceiverJob < Que::Job
           
           content_map[raw_content] = new_content_block
         else
-          puts mime_type.inspect
+          # check for multipart part
+          if part.multipart?
+            handle_multipart_message(part, content_list, content_map)
+          end
         end
       end
 
