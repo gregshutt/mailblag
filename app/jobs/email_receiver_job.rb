@@ -40,7 +40,7 @@ class EmailReceiverJob < Que::Job
 
     post.content = content.string
 
-    post.save
+    post.save!
   end
 
   private
@@ -73,10 +73,11 @@ class EmailReceiverJob < Que::Job
           # store the image
           temp_file = Tempfile.new('email-attachment')
           temp_file.binmode
-          temp_file.write part.attachment
+          temp_file.write part.body.decoded
+          temp_file.flush
           temp_file.rewind
 
-          post_image = PostImage.create(image: temp_file)
+          post_image = PostImage.create!(image: temp_file)
 
           new_content_block = {mime_type: mime_type, post_image: post_image}
 

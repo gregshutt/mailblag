@@ -1,7 +1,6 @@
 # This file is used by Rack-based servers to start the application.
 
 require ::File.expand_path('../config/environment', __FILE__)
-run Rails.application
 
 # from https://github.com/chanks/que/blob/master/docs/advanced_setup.md#forking-servers
 if defined?(PhusionPassenger)
@@ -11,3 +10,5 @@ if defined?(PhusionPassenger)
     end
   end
 end
+
+run Rails.application
