@@ -15,7 +15,7 @@ class NullStorage
   end
 
   def store!(_file)
-    true
+    _file
   end
 
   def retrieve!(_identifier)

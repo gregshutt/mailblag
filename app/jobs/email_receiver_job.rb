@@ -71,7 +71,8 @@ class EmailReceiverJob < Que::Job
         
         if mime_type.start_with? 'image/'
           # store the image
-          temp_file = Tempfile.new('email-attachment')
+          temp_file = Tempfile.new(['email-attachment', 
+            Rack::Mime::MIME_TYPES.invert[mime_type]])
           temp_file.binmode
           temp_file.write part.body.decoded
           temp_file.flush
