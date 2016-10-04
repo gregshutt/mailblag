@@ -16,6 +16,10 @@ gem 'coffee-rails', '~> 4.1.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'therubyracer'
 
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

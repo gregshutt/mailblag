@@ -1,4 +1,27 @@
 module ApplicationHelper
+  
+  def format_date(date)
+    return nil if date.nil?
+
+    date = Time.at(date).to_datetime if date.is_a? Integer
+
+    date.strftime("%b %-d, %Y")
+  end
+
+  def format_datetime(date)
+    return nil if date.nil?
+    
+    date.strftime("%b %-d, %Y at %l:%M%P")
+  end
+
+  def format_time(date)
+    return nil if date.nil?
+
+    date = Time.at(date).to_datetime if date.is_a? Integer
+
+    date.strftime("%l:%M%P")
+  end
+
   def markdown(text, filter_html = false)
     return '' if text.nil?
 
