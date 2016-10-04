@@ -10,6 +10,7 @@ describe "EmailReceiverJob" do
   let(:test_mail_with_html) { File.read(Rails.root.join("spec", "fixtures", "test_mail_with_html.eml")) }
   let(:test_mail_one_picture) { File.read(Rails.root.join("spec", "fixtures", "test_mail_one_picture.eml")) }
   let(:test_mail_two_pictures) { File.read(Rails.root.join("spec", "fixtures", "test_mail_two_pictures.eml")) }
+  let(:test_mail_multipart_related) { File.read(Rails.root.join("spec", "fixtures", "test_mail_multipart_related.eml")) }
 
   it "handles mail messages with plaintext" do
     EmailReceiverJob.enqueue(test_mail_plaintext)
@@ -47,7 +48,7 @@ describe "EmailReceiverJob" do
     expect(post.post_images.length).to eq 1
     expect(post.post_images[0]).not_to be_nil
 
-    expect(post.content).to eq("Attachments included\n\n[![Image]()]()\n\n")
+    expect(post.content).to match(/Attachments included\n\n\[\!\[Image\]\(.+\.jpg\)\]\(.+\.jpg\)\n\n/)
   end
 
   it "handles mail messages with html" do
@@ -82,7 +83,7 @@ describe "EmailReceiverJob" do
     expect(post.post_images.length).to eq 1
     expect(post.post_images[0]).not_to be_nil
 
-    expect(post.content).to eq("[![Image]()]()\n\n\n\nSent from my iPhone")
+    expect(post.content).to match(/\[\!\[Image\]\(.+\.jpg\)\]\(.+\.jpg\)\n\n\n\nSent from my iPhone/)
   end
 
   it "handles mail messages with 2 pictures" do
@@ -100,6 +101,23 @@ describe "EmailReceiverJob" do
     expect(post.post_images[0]).not_to be_nil
     expect(post.post_images[1]).not_to be_nil
 
-    expect(post.content).to eq("[![Image]()]()\n\n[![Image]()]()\n\n\n\nTest text\n\nSent from my iPhone")
+    expect(post.content).to match(/\[\!\[Image\]\(.+\.jpg\)\]\(.+\.jpg\)\n\n\[\!\[Image\]\(.+\.jpg\)\]\(.+\.jpg\)\n\n\n\nTest text\n\nSent from my iPhone/)
+  end
+
+  it "handles mail with multipart/related" do
+    EmailReceiverJob.enqueue(test_mail_multipart_related)
+
+    # find the new post
+    post = Post.first
+
+    expect(post).not_to be_nil
+    expect(post.title).to eq("Multipart related test")
+    expect(post.post_date.utc.to_i).to(
+      eq(DateTime.parse('Mon, 3 Oct 2016 21:26:45 -0400').to_i) )
+
+    expect(post.post_images.length).to eq 3
+    expect(post.post_images[0]).not_to be_nil
+    expect(post.post_images[1]).not_to be_nil
+    expect(post.post_images[2]).not_to be_nil
   end
 end
