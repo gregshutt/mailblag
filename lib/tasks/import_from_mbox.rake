@@ -11,9 +11,7 @@ task :import_from_mbox, [:mbox_file] => [:environment] do |task, args|
       next if message.blank?
 
       # parse the email
-      mail = Mail::Message.new(message)
-
-      
+      mail = Mail::Message.new(message)      
 
       # only use messages that are not in reference to any others
       #  that is, replies and forwards
@@ -29,6 +27,8 @@ task :import_from_mbox, [:mbox_file] => [:environment] do |task, args|
 
       # import
       EmailReceiverJob.enqueue(message)
+
+      puts "Imported #{mail.subject} (#{mail.date})"
 
       message = ''
     else
