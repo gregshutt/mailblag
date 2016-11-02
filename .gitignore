@@ -19,3 +19,5 @@
 !/log/.keep
 /tmp
 /public/system
+
+config/deploy/production.rb
