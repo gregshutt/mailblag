@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <% @posts.each.with_index do |p, idx| %>
+        <div class="row post" data-post-id="<%= idx %>">
+          <div class="col-xs-12">
+            <h2><%= p.title %></h2>
+            <p class="text-muted">Posted on <%= format_datetime p.post_date %></p>
+            <%#= markdown p.content %>  
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-hidden-xs col-md-offset-1 col-md-3">
+      <h3>Archives</h3>
+      <div class="archive">
+        <%= render partial: 'calendar', locals: { all_posts: @all_posts } %>
+      </div>
+    </div>
+  </div>
+</div>

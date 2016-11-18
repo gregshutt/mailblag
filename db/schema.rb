@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20161002175437) do
     t.integer  "site_id"
   end
 
+  create_table "que_jobs", id: false, force: :cascade do |t|
+    t.integer  "priority",    limit: 2, default: 100,                                        null: false
+    t.datetime "run_at",                default: "now()",                                    null: false
+    t.integer  "job_id",      limit: 8, default: "nextval('que_jobs_job_id_seq'::regclass)", null: false
+    t.text     "job_class",                                                                  null: false
+    t.json     "args",                  default: [],                                         null: false
+    t.integer  "error_count",           default: 0,                                          null: false
+    t.text     "last_error"
+    t.text     "queue",                 default: "",                                         null: false
+  end
+
   create_table "site_passwords", force: :cascade do |t|
     t.integer  "site_id"
     t.string   "password"

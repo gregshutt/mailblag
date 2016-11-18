@@ -77,3 +77,5 @@ gem 'acts_as_tenant'
 
 # markdown
 gem 'redcarpet'
+
+gem 'simple_calendar'

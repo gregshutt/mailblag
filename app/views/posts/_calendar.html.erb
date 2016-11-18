@@ -1,0 +1,9 @@
+<%= month_calendar attribute: :post_date, events: all_posts do |date, posts| %>
+  <% if posts.empty? %>
+    <%= date.day %>
+  <% else %>
+    <%= link_to posts_url(date: date) do %>
+      <%= date.day %>
+    <% end %>
+  <% end %>
+<% end %>
