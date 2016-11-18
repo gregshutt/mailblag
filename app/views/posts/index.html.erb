@@ -1,3 +1,4 @@
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-8">
@@ -6,17 +7,27 @@
           <div class="col-xs-12">
             <h2><%= p.title %></h2>
             <p class="text-muted">Posted on <%= format_datetime p.post_date %></p>
-            <%= markdown p.content %>  
+            <%#= markdown p.content %>  
           </div>
         </div>
       <% end %>
     </div>
 
     <div class="col-hidden-xs col-md-offset-1 col-md-3">
-      <h3>Archives</h3>
-      <div class="archive">
-        <%= render partial: 'calendar', locals: { all_posts: @all_posts } %>
+      <div class="sidebar affix" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+        <h3>Archives</h3>
+        <div class="archive">
+          <%= render partial: 'calendar', locals: { all_posts: @all_posts, start_date: @start_date } %>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var startDate = new Date('<%= @start_date %>');
+
+  $(function() {
+    new Posts({start_date: startDate});
+  });
+</script>
