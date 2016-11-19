@@ -7,7 +7,9 @@
         <% end %>
       </div>
       <div class="col-xs-6 text-center">
-        <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+        <span class="calendar-title">
+          <strong><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></strong>
+        </span>
       </div>
       <div class="col-xs-3 text-right">
         <%= link_to '#', 'data-click' => 'calendar-next' do %>

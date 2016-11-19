@@ -1,3 +1,5 @@
+<% params[:start_date] = start_date %>
+
 <%= month_calendar attribute: :post_date, events: all_posts do |date, posts| %>
 
   <% if posts.empty? %>
