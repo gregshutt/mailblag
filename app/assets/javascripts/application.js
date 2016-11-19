@@ -15,6 +15,7 @@
 
 //= require bootstrap/transition
 //= require bootstrap/modal
+//= require bootstrap/collapse
 //= require ekko-lightbox
 
 //= require global
