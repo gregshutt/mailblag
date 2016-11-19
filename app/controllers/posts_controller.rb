@@ -18,4 +18,15 @@ class PostsController < ApplicationController
     @start_date = Date.strptime(params[:start_date], '%m/%d/%Y').beginning_of_month
     @all_posts = Post.order(post_date: :desc).all
   end
+
+  def search
+    site = current_tenant
+
+    @search = Post.search do
+      with :site_id, site.id
+      #fulltext params[:q]
+
+      paginate page: 1, per_page: 25
+    end
+  end
 end

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     get 'calendar', on: :collection
+    get 'search', on: :collection
   end
 end
 
@@ -23,6 +24,7 @@ end
 #     site_login GET    /site-login(.:format)     site_logins#new
 #                POST   /site-login(.:format)     site_logins#create
 # calendar_posts GET    /posts/calendar(.:format) posts#calendar
+#   search_posts GET    /posts/search(.:format)   posts#search
 #          posts GET    /posts(.:format)          posts#index
 #                POST   /posts(.:format)          posts#create
 #       new_post GET    /posts/new(.:format)      posts#new

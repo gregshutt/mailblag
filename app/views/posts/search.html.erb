@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row form-group">
+  </div>
+  
+  <div class="row">
+    <% if ! @search.results.empty? %>
+      <div class="col-xs-12 col-md-8">
+        <%= render partial: 'posts', locals: { posts: @search.results } %>
+      </div>
+    <% else %>
+      <div class="col-xs-12 text-center">
+        <h3>
+          Couldn't find any results :(
+        </h3>
+      </div>
+    <% end %>
+  </div>
+</div>

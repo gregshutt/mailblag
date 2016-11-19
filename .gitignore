@@ -21,3 +21,7 @@
 /public/system
 
 config/deploy/production.rb
+
+/solr/default
+/solr/development
+/solr/test

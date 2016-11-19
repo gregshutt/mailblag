@@ -35,6 +35,9 @@ group :development do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
+
+  # Sunspot 2.2.1 switches to SOLR 5
+  gem 'sunspot_solr', '2.2.0'
 end
 
 group :development, :test do
@@ -79,3 +82,6 @@ gem 'acts_as_tenant'
 gem 'redcarpet'
 
 gem 'simple_calendar'
+
+# Sunspot 2.2.1 switches to SOLR 5
+gem 'sunspot_rails', '2.2.0'
