@@ -24,7 +24,10 @@ class PostsController < ApplicationController
 
     @search = Post.search do
       with :site_id, site.id
-      #fulltext params[:q]
+      fulltext params[:q]
+
+      order_by :score
+      order_by :post_date, :desc
 
       paginate page: 1, per_page: 25
     end

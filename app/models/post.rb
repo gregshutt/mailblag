@@ -22,5 +22,7 @@ class Post < ActiveRecord::Base
     text :content
 
     integer :site_id
+
+    date :post_date
   end
 end

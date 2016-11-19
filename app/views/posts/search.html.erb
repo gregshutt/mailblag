@@ -3,6 +3,18 @@
   </div>
   
   <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <p>
+        Found <%= pluralize @search.total, 'post' %>
+        matching "<%= params[:q] %>".
+        <%= link_to posts_url do %>
+          Back to all posts.
+        <% end %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
     <% if ! @search.results.empty? %>
       <div class="col-xs-12 col-md-8">
         <%= render partial: 'posts', locals: { posts: @search.results } %>
