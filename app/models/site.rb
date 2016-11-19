@@ -3,6 +3,7 @@
 # Table name: sites
 #
 #  created_at       :datetime
+#  footer_text      :text
 #  hostname         :string
 #  id               :integer          not null, primary key
 #  is_default       :boolean
