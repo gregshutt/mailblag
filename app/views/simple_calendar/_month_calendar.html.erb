@@ -1,17 +1,17 @@
 <div class="simple-calendar">
   <div class="calendar-heading">
     <div class="row">
-      <div class="col-xs-3">
+      <div class="col-xs-4">
         <%= link_to '#', 'data-click' => 'calendar-prev' do %>
           <i class="fa fa-angle-left"></i> Prev
         <% end %>
       </div>
-      <div class="col-xs-6 text-center">
+      <div class="col-xs-4 text-center">
         <span class="calendar-title">
           <strong><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></strong>
         </span>
       </div>
-      <div class="col-xs-3 text-right">
+      <div class="col-xs-4 text-right">
         <%= link_to '#', 'data-click' => 'calendar-next' do %>
           Next <i class="fa fa-angle-right"></i>
         <% end %>
