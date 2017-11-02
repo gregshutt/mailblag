@@ -84,4 +84,4 @@ gem 'redcarpet'
 gem 'simple_calendar'
 
 # Sunspot 2.2.1 switches to SOLR 5
-gem 'sunspot_rails', '2.2.0'
+gem 'sunspot_rails', '2.2.7'

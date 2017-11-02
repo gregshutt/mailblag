@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '3.10.0'
 
 set :application, 'MailBlag'
 set :repo_url, 'https://github.com/gregshutt/mailblag.git'
@@ -9,9 +9,6 @@ set :repo_url, 'https://github.com/gregshutt/mailblag.git'
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
-
-# Default value for :scm is :git
-set :scm, :git
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
