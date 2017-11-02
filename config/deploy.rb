@@ -52,7 +52,7 @@ namespace :foreman do
   task :export do
     on roles :app do
       within release_path do
-        execute :rvmsudo, "foreman export systemd /lib/systemd/system -m mail_room=1 -a mailblog -u #{fetch(:foreman_user)} -l #{File.join(shared_path, 'log')}"
+        execute :rvmsudo, "foreman export systemd /lib/systemd/system -m mail_room=1 -a mailblag -u #{fetch(:foreman_user)} -l #{File.join(shared_path, 'log')}"
       end
     end
   end
