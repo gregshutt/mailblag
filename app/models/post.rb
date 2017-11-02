@@ -23,6 +23,6 @@ class Post < ActiveRecord::Base
 
     integer :site_id
 
-    date :post_date
+    time :post_date
   end
 end
