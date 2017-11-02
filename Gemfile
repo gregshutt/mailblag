@@ -37,7 +37,7 @@ group :development do
   gem 'capistrano-passenger', require: false
 
   # Sunspot 2.2.1 switches to SOLR 5
-  gem 'sunspot_solr', '2.2.0'
+  gem 'sunspot_solr', '2.2.7'
 end
 
 group :development, :test do
