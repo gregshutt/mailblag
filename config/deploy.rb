@@ -33,4 +33,40 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
+
+set :passenger_restart_with_touch, true
+
+# load the variable from the stage
+#  see http://capistranorb.com/documentation/faq/how-can-i-access-stage-configuration-variables/
+set :foreman_user, -> { fetch(:deploy_user) }
+
+# install the foreman jobs
+#  see https://rvm.io/integration/sudo
+set :default_env, { 
+  'rvmsudo_secure_path' => '0'
+}
+
+#  see https://github.com/capistrano/rvm/issues/53
+set :rvm_map_bins, fetch(:rvm_map_bins, []).push('rvmsudo')
+
+namespace :foreman do
+  desc "Export the Procfile to systemd"
+  task :export do
+    on roles :app do
+      within release_path do
+        execute :rvmsudo, "foreman export systemd /lib/systemd/system -m mail_room=1 -a mailblog -u #{fetch(:foreman_user)} -l #{File.join(shared_path, 'log')}"
+      end
+    end
+  end
+
+  task :restart do
+    on roles :app do
+      execute :sudo, "systemctl daemon-reload"
+      execute :sudo, "systemctl restart mailblag.target"
+    end
+  end
+end
+
+after "deploy:finished", "foreman:export"
+after "deploy:finished", "foreman:restart"

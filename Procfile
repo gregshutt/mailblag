@@ -1,0 +1,1 @@
+mail_room: bundle exec mail_room -c config/mailroom.yml
