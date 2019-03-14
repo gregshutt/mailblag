@@ -59,7 +59,7 @@ group :test do
   gem 'que-testing'
 end
 
-gem 'pg'
+gem 'pg', '~> 0.20'
 
 # authentication
 gem 'sorcery'
